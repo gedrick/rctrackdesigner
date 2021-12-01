@@ -29,7 +29,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .grid-item {
   aspect-ratio: 1 / 1;
-  background-color: $lightblue;
+  background-color: $medblue;
   color: $white;
   width: 8vw;
   border-radius: 5px;
@@ -60,9 +60,11 @@ export default defineComponent({
   }
 
   .default {
-    .top-left-corner {
-      top: 0;
-    }
+    // @include stripes;
+  }
+
+  .blocked {
+    // @include stripes;
   }
 }
 </style>

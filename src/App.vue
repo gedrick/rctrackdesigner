@@ -5,7 +5,6 @@
       <div v-for="(blockRow, rowIndex) in blocks" :key="rowIndex" class="block-row">
         <GridItem
           v-for="(blockItem, columnIndex) in blockRow"
-          :class="`w-1/${blockRow.length} h-1/${blockRow.length} w-auto`"
           :key="`${rowIndex}-${columnIndex}`"
           :item="blockItem"
         />
