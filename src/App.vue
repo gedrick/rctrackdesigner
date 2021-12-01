@@ -1,11 +1,14 @@
 <template>
-  <div class="grid-container">
-    <div class="grid-row" v-for="(blockRow, rowIndex) in blocks" :key="rowIndex">
-      <GridItem
-        v-for="(blockItem, columnIndex) in blockRow"
-        :key="`${rowIndex}-${columnIndex}`"
-        :item="blockItem"
-      />
+  <div class="container">
+    <div class="block-column">
+      <div v-for="(blockRow, rowIndex) in blocks" :key="rowIndex" class="block-row">
+        <GridItem
+          v-for="(blockItem, columnIndex) in blockRow"
+          :class="`w-1/${blockRow.length} h-1/${blockRow.length} w-auto`"
+          :key="`${rowIndex}-${columnIndex}`"
+          :item="blockItem"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -14,51 +17,81 @@
 import { defineComponent } from 'vue';
 import GridItem from './components/GridItem.vue';
 
+declare interface Block {
+  type: string;
+}
+
 export default defineComponent({
   name: 'App',
   components: {
     GridItem,
   },
+  computed: {
+    width(): number {
+      return Math.max(this.side1, this.side2);
+    },
+    height(): number {
+      return Math.min(this.side1, this.side2);
+    },
+  },
   data() {
     return {
-      width: 20,
-      height: 20,
-      blocks: [] as { type: string }[],
+      side1: 6 as number,
+      side2: 10 as number,
+      blocks: [] as Block[][],
       sampleRow: [
         { type: 'default' },
         { type: 'leftToRight' },
         { type: 'leftToRight' },
         { type: 'leftToUp' },
-      ],
+      ] as Block[],
     };
   },
   mounted() {
     // Set up default blocks
-    this.blocks = [...this.sampleRow, ...this.sampleRow, ...this.sampleRow, ...this.sampleRow];
+    this.generateBlocks();
+  },
+  methods: {
+    generateBlocks() {
+      const row = Array(this.width).fill({ type: 'default' });
+      this.blocks = Array(this.height).fill(row);
+    },
   },
 });
 </script>
 
-<style lang="scss" scoped>
-#app {
+<style lang="scss">
+$blockSpace: 5px;
+body {
+  overflow: hidden;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-color: #1d3557;
 }
 
-.grid-container {
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  // max-width: 90vw;
+  // max-height: 90vh;
+}
+
+.block-column {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
+  gap: $blockSpace;
 }
 
-.grid-row {
+.block-row {
   display: flex;
   flex-direction: row;
-  flex-grow: 1;
+  gap: $blockSpace;
 }
+
+// lightblue: '#457b9d',
+//     darkblue: '#1d3557',
+//     white: '#f1faee',
 </style>
