@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <Settings />
     <div class="block-column">
       <div v-for="(blockRow, rowIndex) in blocks" :key="rowIndex" class="block-row">
         <GridItem
@@ -15,7 +16,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import GridItem from './components/GridItem.vue';
+import GridItem from '@/components/GridItem.vue';
+import Settings from '@/components/Settings.vue';
 
 declare interface Block {
   type: string;
@@ -25,6 +27,7 @@ export default defineComponent({
   name: 'App',
   components: {
     GridItem,
+    Settings,
   },
   computed: {
     width(): number {
@@ -61,13 +64,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-$blockSpace: 5px;
 body {
   overflow: hidden;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #1d3557;
+  background-color: $darkblue;
 }
 
 .container {
@@ -75,8 +77,6 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  // max-width: 90vw;
-  // max-height: 90vh;
 }
 
 .block-column {
@@ -90,8 +90,4 @@ body {
   flex-direction: row;
   gap: $blockSpace;
 }
-
-// lightblue: '#457b9d',
-//     darkblue: '#1d3557',
-//     white: '#f1faee',
 </style>

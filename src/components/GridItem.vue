@@ -29,9 +29,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 .grid-item {
   aspect-ratio: 1 / 1;
-  background-color: #457b9d;
-  color: #f1faee;
-  width: 6vw;
+  background-color: $lightblue;
+  color: $white;
+  width: 8vw;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -45,6 +45,7 @@ export default defineComponent({
     opacity: 0.8;
   }
   &:active {
+    transition: none;
     opacity: 1;
   }
 
