@@ -26,7 +26,7 @@ export default defineComponent({
     return {
       blocks: [] as Block[][],
       sampleRow: [
-        { type: 'default' },
+        { type: 'open' },
         { type: 'leftToRight' },
         { type: 'leftToRight' },
         { type: 'leftToUp' },

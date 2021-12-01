@@ -55,6 +55,9 @@ export default defineComponent({
     margin-right: 50px;
   }
 
+  opacity: 0.4;
+  transition: 0.3s all ease-in-out;
+
   &:hover {
     opacity: 1;
   }
@@ -64,11 +67,11 @@ export default defineComponent({
   color: $white;
   font-family: $baseFont;
   font-size: 23px;
+  font-weight: bold;
 }
 
 .arrow {
-  opacity: 0.4;
-  transition: 0.3s all ease-in-out;
+  cursor: pointer;
   border: solid;
   border-color: $white;
   border-width: 0 3px 3px 0;

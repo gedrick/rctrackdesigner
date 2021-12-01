@@ -1,11 +1,10 @@
 <template>
   <div :class="`${item.type}`" class="grid-item">
-    <div v-if="item.type === 'default'" class="default">
+    <div v-if="item.type === 'default'" :class="item.type">
       <div class="track-object top-left-corner"></div>
       <div class="track-object right-piece"></div>
       <div class="track-object bottom-piece"></div>
     </div>
-    <!-- {{ item.type }} -->
   </div>
 </template>
 
