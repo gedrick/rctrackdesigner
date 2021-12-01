@@ -1,8 +1,9 @@
 <template>
   <div :class="`${item.type}`" class="grid-item">
     <div v-if="item.type === 'default'" class="default">
-      <div class="corner-piece"></div>
-      <div class="bottom-pipe"></div>
+      <div class="track-object top-left-corner"></div>
+      <div class="track-object right-piece"></div>
+      <div class="track-object bottom-piece"></div>
     </div>
     <!-- {{ item.type }} -->
   </div>
@@ -53,35 +54,14 @@ export default defineComponent({
     height: 100%;
   }
 
-  .default {
-    // background-color: red;
-    position: relative;
-
-    .corner-piece {
-      position: absolute;
-      background-color: white;
-      transform: rotate(45deg);
-      border-bottom: 2px solid black;
-      border-top: 2px solid black;
-      width: 4%;
-      height: 80%;
-      top: -2%;
-      left: 34%;
-    }
-
-    .bottom-pipe {
-      position: absolute;
-      background-color: white;
-      border-bottom: 1px solid black;
-      border-top: 1px solid black;
-      width: 4%;
-      height: 28%;
-      left: 5%;
-      bottom: 1%;
-    }
+  .track-object {
+    position: absolute;
   }
 
-  .top-left-corner {
+  .default {
+    .top-left-corner {
+      top: 0;
+    }
   }
 }
 </style>
