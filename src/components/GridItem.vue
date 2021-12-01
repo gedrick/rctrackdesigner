@@ -31,7 +31,7 @@ export default defineComponent({
   aspect-ratio: 1 / 1;
   background-color: $medblue;
   color: $white;
-  width: 8vw;
+  width: 7vw;
   border-radius: 5px;
   display: flex;
   justify-content: center;

@@ -1,45 +1,29 @@
 <template>
   <div class="container">
     <Settings />
-    <div class="block-column">
-      <div v-for="(blockRow, rowIndex) in blocks" :key="rowIndex" class="block-row">
-        <GridItem
-          v-for="(blockItem, columnIndex) in blockRow"
-          :key="`${rowIndex}-${columnIndex}`"
-          :item="blockItem"
-        />
-      </div>
-    </div>
+    <Track :blocks="blocks" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import GridItem from '@/components/GridItem.vue';
 import Settings from '@/components/Settings.vue';
+import Track from '@/components/Track.vue';
+import { mapState } from 'vuex';
 
-declare interface Block {
+type Block = {
+  name: string;
   type: string;
-}
+};
 
 export default defineComponent({
   name: 'App',
   components: {
-    GridItem,
     Settings,
-  },
-  computed: {
-    width(): number {
-      return Math.max(this.side1, this.side2);
-    },
-    height(): number {
-      return Math.min(this.side1, this.side2);
-    },
+    Track,
   },
   data() {
     return {
-      side1: 6 as number,
-      side2: 10 as number,
       blocks: [] as Block[][],
       sampleRow: [
         { type: 'default' },
@@ -48,6 +32,15 @@ export default defineComponent({
         { type: 'leftToUp' },
       ] as Block[],
     };
+  },
+  computed: {
+    ...mapState(['dimension1', 'dimension2']),
+    width(): number {
+      return Math.max(this.dimension1, this.dimension2);
+    },
+    height(): number {
+      return Math.min(this.dimension1, this.dimension2);
+    },
   },
   mounted() {
     // Set up default blocks
@@ -65,7 +58,7 @@ export default defineComponent({
 <style lang="scss">
 body {
   overflow: hidden;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: $baseFont;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: $darkblue;
