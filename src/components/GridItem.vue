@@ -61,12 +61,12 @@ export default defineComponent({
   background-color: $medblue;
 
   &.fade {
+    transition: none;
     opacity: 0.6;
     &:hover {
       opacity: 0.8;
     }
     &:active {
-      transition: none;
       opacity: 1;
     }
   }

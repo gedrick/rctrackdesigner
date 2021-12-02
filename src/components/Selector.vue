@@ -102,7 +102,6 @@ export default defineComponent({
   flex-direction: row;
   flex-basis: 100%;
   flex-wrap: wrap;
-  // grid-template-columns: #{$blockSize} #{$blockSize};
   gap: $blockSpace;
 }
 </style>
