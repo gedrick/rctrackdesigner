@@ -1,5 +1,5 @@
 <template>
-  <div :class="`${item.type}`" class="grid-item">
+  <div :class="`${item.type} ${effects ? 'effects' : ''}`" class="grid-item">
     <div v-if="item.type === 'default'" :class="item.type">
       <div class="track-object top-left-corner"></div>
       <div class="track-object right-piece"></div>
@@ -21,6 +21,10 @@ export default defineComponent({
       },
       required: true,
     },
+    effects: {
+      type: Boolean,
+      default: true,
+    },
   },
 });
 </script>
@@ -28,24 +32,27 @@ export default defineComponent({
 <style lang="scss" scoped>
 .grid-item {
   aspect-ratio: 1 / 1;
-  background-color: $medblue;
   color: $white;
-  width: 7vw;
+  width: $blockSize;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: 0.35s all ease-in-out;
   user-select: none;
-  opacity: 0.6;
   cursor: pointer;
   position: relative;
-  &:hover {
-    opacity: 0.8;
-  }
-  &:active {
-    transition: none;
-    opacity: 1;
+  background-color: $medblue;
+
+  &.effects {
+    opacity: 0.6;
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active {
+      transition: none;
+      opacity: 1;
+    }
   }
 
   & > div {

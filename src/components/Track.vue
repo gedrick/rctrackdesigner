@@ -28,3 +28,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.block-column {
+  z-index: 2;
+}
+</style>

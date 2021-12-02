@@ -1,24 +1,23 @@
 <template>
-  <div class="container">
+  <div class="app">
     <Settings />
+    <Selector />
     <Track :blocks="blocks" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import Selector from '@/components/Selector.vue';
 import Settings from '@/components/Settings.vue';
 import Track from '@/components/Track.vue';
 import { mapState } from 'vuex';
-
-type Block = {
-  name: string;
-  type: string;
-};
+import { Block } from '@/types';
 
 export default defineComponent({
   name: 'App',
   components: {
+    Selector,
     Settings,
     Track,
   },
@@ -64,7 +63,7 @@ body {
   background-color: $darkblue;
 }
 
-.container {
+.app {
   display: flex;
   justify-content: center;
   align-items: center;

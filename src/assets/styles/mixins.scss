@@ -11,3 +11,12 @@
   );
   background-size: 56.57px 56.57px;
 }
+
+@mixin arrow {
+  cursor: pointer;
+  border: solid;
+  border-color: $white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 10px;
+}

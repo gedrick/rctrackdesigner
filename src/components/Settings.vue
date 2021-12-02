@@ -71,12 +71,7 @@ export default defineComponent({
 }
 
 .arrow {
-  cursor: pointer;
-  border: solid;
-  border-color: $white;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 10px;
+  @include arrow;
 
   &.up {
     transform: rotate(-135deg);
