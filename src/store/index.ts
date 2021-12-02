@@ -1,12 +1,9 @@
 import { createStore } from 'vuex';
-
-type Block = {
-  name: string;
-  type: string;
-};
+import { Block } from '@/types';
 
 export default createStore({
   state: {
+    currentBlock: null as Block | null,
     dimension1: 6,
     dimension2: 10,
     track: [] as Block[][],
@@ -17,6 +14,9 @@ export default createStore({
     },
     setDimension2(state, dimension: number) {
       state.dimension2 = dimension;
+    },
+    setCurrentBlock(state, block: Block) {
+      state.currentBlock = block;
     },
     // generateMap(state) {
     // const row: Array<Block> = state.dimension1.fill({ name: 'none', type: 'none' });

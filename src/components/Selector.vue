@@ -2,13 +2,13 @@
   <div class="selector" :class="{ isOpen: isOpen }" @click="isOpen = false">
     <div v-if="!isOpen" class="toggle" @click.stop="isOpen = !isOpen"></div>
     <div v-else>
-      <div class="grid">
+      <div class="flex">
         <GridItem
-          @click.stop="onTrackSelected(item.type)"
+          @click.stop="onTrackSelected(item)"
           v-for="item in gridItems"
           :key="item.name"
           :item="item"
-          :effects="false"
+          :animation-type="'grow'"
         />
       </div>
     </div>
@@ -19,6 +19,7 @@
 import { defineComponent } from 'vue';
 import GridItem from '@/components/GridItem.vue';
 import { Block } from '@/types';
+import { mapMutations } from 'vuex';
 
 export default defineComponent({
   name: 'Selector',
@@ -27,27 +28,44 @@ export default defineComponent({
   },
   data() {
     return {
-      isOpen: false as boolean,
+      isOpen: true as boolean,
       gridItems: [
+        // Straightaways
         { type: 'up-down' },
+        { type: 'up-down', barriers: ['left'] },
+        { type: 'up-down', barriers: ['right'] },
+        { type: 'up-down', barriers: ['left', 'right'] },
         { type: 'left-right' },
-        { type: 'left-up' },
-        { type: 'left-down' },
+        { type: 'left-right', barriers: ['top'] },
+        { type: 'left-right', barriers: ['bottom'] },
+        { type: 'left-right', barriers: ['top', 'bottom'] },
+
+        // Curves
+        { type: 'left-up', barriers: ['bottom-right'] },
+        { type: 'left-down', barriers: ['top-right'] },
         { type: 'right-up' },
         { type: 'right-down' },
         { type: 'down-left' },
         { type: 'down-right' },
         { type: 'open-road' },
+
+        // Features
         { type: 'jump' },
         { type: 'table-top' },
         { type: 'landing' },
         { type: 'rhythm' },
+
+        // Empty
+        { type: 'stripes' },
       ] as Block[],
     };
   },
   methods: {
-    onTrackSelected(trackType: string) {
-      console.log('onTrackSelected', trackType);
+    ...mapMutations(['setCurrentBlock']),
+    onTrackSelected(block: Block) {
+      this.setCurrentBlock(block);
+
+      console.log('onTrackSelected', block);
     },
   },
 });
@@ -61,7 +79,7 @@ export default defineComponent({
   left: 0;
   top: 0;
   height: 100%;
-  background-color: rgba(black, 0.3);
+  background-color: rgba(black, 0.8);
   width: 1vw;
   z-index: 6;
   transition: $animationTime all ease-in-out;
@@ -79,9 +97,12 @@ export default defineComponent({
   cursor: pointer;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: #{$blockSize} #{$blockSize};
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+  // grid-template-columns: #{$blockSize} #{$blockSize};
   gap: $blockSpace;
 }
 </style>

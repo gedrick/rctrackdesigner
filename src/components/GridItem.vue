@@ -1,10 +1,26 @@
 <template>
-  <div :class="`${item.type} ${effects ? 'effects' : ''}`" class="grid-item">
-    <div v-if="item.type === 'default'" :class="item.type">
+  <div :class="`${item.type} ${animationType}`" class="grid-item">
+    <div v-if="item.type === 'default'" :class="`${item.type}`">
       <div class="track-object top-left-corner"></div>
       <div class="track-object right-piece"></div>
       <div class="track-object bottom-piece"></div>
     </div>
+    <div v-if="item.type === 'up-down'" :class="`${item.type}`">
+      <div class="track-object road"></div>
+      <div class="track-object stripe"></div>
+    </div>
+    <div v-if="item.type === 'left-right'" :class="`${item.type}`">
+      <div class="track-object road"></div>
+      <div class="track-object stripe"></div>
+    </div>
+    <div v-if="item.type === 'stripes'" :class="`${item.type}`">
+      <div class="track-object stripes"></div>
+    </div>
+    <div v-if="item.type === 'stripes'" :class="`${item.type}`">
+      <div class="track-object stripes"></div>
+    </div>
+
+    <div v-for="barrier in item.barriers" :key="barrier" :class="barrier" class="barrier"></div>
   </div>
 </template>
 
@@ -21,9 +37,9 @@ export default defineComponent({
       },
       required: true,
     },
-    effects: {
-      type: Boolean,
-      default: true,
+    animationType: {
+      type: String,
+      default: 'fade',
     },
   },
 });
@@ -38,13 +54,13 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.35s all ease-in-out;
+  transition: $animationTime all ease-in-out;
   user-select: none;
   cursor: pointer;
   position: relative;
   background-color: $medblue;
 
-  &.effects {
+  &.fade {
     opacity: 0.6;
     &:hover {
       opacity: 0.8;
@@ -55,7 +71,20 @@ export default defineComponent({
     }
   }
 
-  & > div {
+  &.grow {
+    opacity: 1;
+    border: 1px solid $darkblue;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+    &:active {
+      transition: none;
+      opacity: 1;
+    }
+  }
+
+  & > div:not(.barrier) {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -65,12 +94,59 @@ export default defineComponent({
     position: absolute;
   }
 
+  .up-down {
+  }
+
+  .left-right {
+    .road {
+      transform: rotate(90deg);
+    }
+    .stripe {
+      left: 43%;
+      transform: rotate(90deg);
+      top: 7%;
+    }
+  }
+
+  .stripes {
+    @include stripes;
+  }
+
   .default {
     // @include stripes;
   }
 
   .blocked {
     // @include stripes;
+  }
+
+  .barrier {
+    position: absolute;
+    background-color: $red;
+    @include stripes;
+    &.left {
+      height: 100%;
+      width: 5%;
+      top: 0;
+      left: 0;
+    }
+    &.right {
+      height: 100%;
+      width: 5%;
+      right: 0;
+    }
+    &.top {
+      width: 100%;
+      height: 5%;
+      top: 0;
+      left: 0;
+    }
+    &.bottom {
+      width: 100%;
+      height: 5%;
+      bottom: 0;
+      left: 0;
+    }
   }
 }
 </style>

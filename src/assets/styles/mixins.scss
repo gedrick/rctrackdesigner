@@ -11,6 +11,19 @@
   );
   background-size: 56.57px 56.57px;
 }
+.road {
+  background-color: $medblue;
+  width: 90%;
+  height: 100%;
+  left: 5%;
+}
+
+.stripe {
+  border-left: 0.25vw dashed $white;
+  height: 100%;
+  width: 10%;
+  left: 50%;
+}
 
 @mixin arrow {
   cursor: pointer;
