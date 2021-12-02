@@ -1,6 +1,6 @@
 <template>
   <div class="selector" :class="{ isOpen: isOpen }" @click="isOpen = false">
-    <div v-if="!isOpen"><span class="toggle" @click.stop="isOpen = !isOpen"></span></div>
+    <div v-if="!isOpen" class="toggle" @click.stop="isOpen = !isOpen"></div>
     <div v-else>
       <div class="grid">
         <GridItem
