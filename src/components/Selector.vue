@@ -63,9 +63,9 @@ export default defineComponent({
   methods: {
     ...mapMutations(['setCurrentBlock']),
     onTrackSelected(block: Block) {
-      this.setCurrentBlock(block);
-
       console.log('onTrackSelected', block);
+      this.setCurrentBlock(block);
+      this.isOpen = false;
     },
   },
 });
@@ -79,14 +79,14 @@ export default defineComponent({
   left: 0;
   top: 0;
   height: 100%;
-  background-color: rgba(black, 0.8);
   width: 1vw;
+  background-color: rgba(black, 0.8);
   z-index: 6;
   transition: $animationTime all ease-in-out;
 
   &.isOpen {
-    padding: 10px;
     width: 100%;
+    padding: 10px;
   }
 }
 
