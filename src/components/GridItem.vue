@@ -17,17 +17,10 @@
       <div class="track-object road"></div>
       <div class="track-object stripe"></div>
     </div>
-    <div v-if="item.type === 'left-up'" :class="`${item.type}`">
-      <!-- <CurvedTurn /> move into own component and rotate for re-usability -->
-      <div class="track-object stripes"></div>
-      <div class="track-object circle"></div>
-      <div class="track-object left-rect"></div>
-      <div class="track-object right-rect"></div>
-      <div class="track-object curve"></div>
-    </div>
     <div v-if="item.type === 'stripes'" :class="`${item.type}`">
       <div class="track-object stripes"></div>
     </div>
+    <CurvedTurn v-if="curves.includes(item.type)" :class="item.type" />
 
     <div v-for="barrier in item.barriers" :key="barrier" :class="barrier" class="barrier"></div>
   </div>
@@ -35,9 +28,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import CurvedTurn from '@/components/Pieces/CurvedTurn.vue';
 
 export default defineComponent({
   name: 'GridItem',
+  components: {
+    CurvedTurn,
+  },
   props: {
     item: {
       type: Object,
@@ -51,10 +48,23 @@ export default defineComponent({
       default: 'fade',
     },
   },
+  data() {
+    return {
+      curves: [
+        'left-up',
+        'left-down',
+        'right-up',
+        'right-down',
+        'down-left',
+        'down-right',
+        'open-road',
+      ],
+    };
+  },
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .grid-item {
   overflow: hidden;
   aspect-ratio: 1 / 1;
@@ -112,51 +122,9 @@ export default defineComponent({
       transform: rotate(90deg);
     }
     .stripe {
-      left: 43%;
+      left: 47%;
       transform: rotate(90deg);
       top: 7%;
-    }
-  }
-
-  .left-up {
-    .stripes {
-      @include stripes;
-      width: 100%;
-      height: 100%;
-    }
-    .circle {
-      border-radius: 50%;
-      background-color: $medblue;
-      width: 100%;
-      height: 100%;
-      bottom: 5%;
-      right: 5%;
-    }
-    .left-rect {
-      background-color: $medblue;
-      width: 50%;
-      height: 95%;
-      top: 0;
-      left: 0;
-    }
-    .right-rect {
-      background-color: $medblue;
-      width: 50%;
-      height: 95%;
-      top: -50%;
-      right: 5%;
-    }
-    .curve {
-      background-color: transparent;
-      border-radius: 50%;
-      width: 100%;
-      height: 100%;
-      top: -25%;
-      left: -25%;
-      margin: -34px;
-      border-bottom: 5px solid $white;
-      border-right: 5px solid $white;
-      border-style: dashed;
     }
   }
 
@@ -170,6 +138,18 @@ export default defineComponent({
 
   .blocked {
     // @include stripes;
+  }
+
+  .left-up {
+  } // do nothing
+  .left-down {
+    transform: rotate(270deg);
+  }
+  .right-up {
+    transform: rotate(90deg);
+  }
+  .right-down {
+    transform: rotate(180deg);
   }
 
   .barrier {
