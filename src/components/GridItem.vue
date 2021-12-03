@@ -20,6 +20,7 @@
     <div v-if="item.type === 'stripes'" :class="`${item.type}`">
       <div class="track-object stripes"></div>
     </div>
+    <Bridge v-if="bridges.includes(item.type)" :class="item.type" />
     <CurvedTurn v-if="curves.includes(item.type)" :class="item.type" />
     <Barrier v-for="barrier in item.barriers" :key="barrier" :side="barrier" />
   </div>
@@ -28,12 +29,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import CurvedTurn from '@/components/Pieces/CurvedTurn.vue';
+import Bridge from '@/components/Pieces/Bridge.vue';
 import Barrier from '@/components/Pieces/Barrier.vue';
 
 export default defineComponent({
   name: 'GridItem',
   components: {
     CurvedTurn,
+    Bridge,
     Barrier,
   },
   props: {
@@ -60,6 +63,7 @@ export default defineComponent({
         'down-right',
         'open-road',
       ],
+      bridges: ['bridge-left-right', 'bridge-up-down'],
     };
   },
 });
@@ -130,6 +134,7 @@ export default defineComponent({
     @include stripes;
   }
 
+  // Curves
   .left-down {
     transform: rotate(270deg);
   }
@@ -138,6 +143,11 @@ export default defineComponent({
   }
   .right-down {
     transform: rotate(180deg);
+  }
+
+  // Bridge
+  .bridge-left-right {
+    transform: rotate(90deg);
   }
 }
 </style>

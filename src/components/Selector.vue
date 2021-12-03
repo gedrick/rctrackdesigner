@@ -51,8 +51,8 @@ export default defineComponent({
         // { type: 'table-top' },
         // { type: 'landing' },
         // { type: 'rhythm' },
-        { type: 'bridge-left-right' },
         { type: 'bridge-up-down' },
+        { type: 'bridge-left-right' },
 
         // Empty
         { type: 'stripes' },
