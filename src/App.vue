@@ -3,6 +3,7 @@
     <Settings />
     <Selector />
     <Track />
+    <Controls />
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import { defineComponent } from 'vue';
 import Selector from '@/components/Selector.vue';
 import Settings from '@/components/Settings.vue';
 import Track from '@/components/Track.vue';
+import Controls from '@/components/Controls.vue';
 import { mapActions, mapState } from 'vuex';
 import { Block } from '@/types';
 
@@ -20,6 +22,7 @@ export default defineComponent({
     Selector,
     Settings,
     Track,
+    Controls,
   },
   data() {
     return {

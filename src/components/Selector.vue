@@ -4,11 +4,11 @@
     <div v-else>
       <div class="flex">
         <GridItem
-          @click.stop="onTrackSelected(item)"
           v-for="item in gridItems"
-          :key="item.name"
+          :key="item.id"
           :item="item"
           :animation-type="'grow'"
+          @click.stop="onTrackSelected(item)"
         />
       </div>
     </div>
@@ -18,8 +18,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import GridItem from '@/components/GridItem.vue';
-import { Block } from '@/types';
+import type { Block } from '@/types';
 import { mapMutations } from 'vuex';
+import * as BlockTypes from '@/constants';
 
 export default defineComponent({
   name: 'Selector',
@@ -30,33 +31,35 @@ export default defineComponent({
     return {
       isOpen: true as boolean,
       gridItems: [
+        // Empty
+        BlockTypes.BLOCK_EMPTY,
+        BlockTypes.BLOCK_STRIPES,
+
         // Straightaways
-        { type: 'up-down' },
-        { type: 'up-down', barriers: ['left'] },
-        { type: 'up-down', barriers: ['right'] },
-        { type: 'up-down', barriers: ['left', 'right'] },
-        { type: 'left-right' },
-        { type: 'left-right', barriers: ['top'] },
-        { type: 'left-right', barriers: ['bottom'] },
-        { type: 'left-right', barriers: ['top', 'bottom'] },
+        BlockTypes.BLOCK_UP_DOWN,
+        BlockTypes.BLOCK_UP_DOWN_LEFT,
+        BlockTypes.BLOCK_UP_DOWN_RIGHT,
+        BlockTypes.BLOCK_UP_DOWN_LEFT_RIGHT,
+        BlockTypes.BLOCK_LEFT_RIGHT,
+        BlockTypes.BLOCK_LEFT_RIGHT_TOP,
+        BlockTypes.BLOCK_LEFT_RIGHT_BOTTOM,
+        BlockTypes.BLOCK_LEFT_RIGHT_TOP_BOTTOM,
 
         // Curves
-        { type: 'left-up' },
-        { type: 'left-down' },
-        { type: 'right-up' },
-        { type: 'right-down' },
+        BlockTypes.BLOCK_LEFT_UP,
+        BlockTypes.BLOCK_LEFT_DOWN,
+        BlockTypes.BLOCK_RIGHT_UP,
+        BlockTypes.BLOCK_RIGHT_DOWN,
 
         // Features
-        // { type: 'jump' },
-        // { type: 'table-top' },
-        // { type: 'landing' },
-        // { type: 'rhythm' },
-        { type: 'bridge-up-down' },
-        { type: 'bridge-left-right' },
+        BlockTypes.BLOCK_JUMP,
+        BlockTypes.BLOCK_TABLE_TOP,
+        BlockTypes.BLOCK_LANDING,
+        BlockTypes.BLOCK_WHOOPS,
 
-        // Empty
-        { type: 'stripes' },
-      ] as Block[],
+        BlockTypes.BLOCK_BRIDGE_UP_DOWN,
+        BlockTypes.BLOCK_BRIDGE_LEFT_RIGHT,
+      ],
     };
   },
   methods: {

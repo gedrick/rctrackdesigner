@@ -17,6 +17,7 @@
 import { defineComponent } from 'vue';
 import GridItem from '@/components/GridItem.vue';
 import { mapMutations, mapState } from 'vuex';
+import { BLOCK_EMPTY } from '@/constants';
 
 export default defineComponent({
   name: 'Track',
@@ -29,7 +30,7 @@ export default defineComponent({
   methods: {
     ...mapMutations(['setTrackPosition']),
     gridItemRightClicked(position: string) {
-      this.setTrackPosition({ block: { type: 'empty' }, position });
+      this.setTrackPosition({ block: BLOCK_EMPTY, position });
     },
     gridItemClicked(position: string) {
       if (!this.currentBlock) return;

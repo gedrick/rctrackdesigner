@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 import { Block } from '@/types';
+import { BLOCK_EMPTY } from '@/constants';
 
 export default createStore({
   state: {
@@ -32,7 +33,7 @@ export default createStore({
       const track = [] as Block[][];
       const largeDimension: number = Math.max(state.dimension1, state.dimension2);
       const smallDimension: number = Math.min(state.dimension1, state.dimension2);
-      const emptyBlock: Block = { type: 'empty' };
+      const emptyBlock: Block = BLOCK_EMPTY;
 
       let nextRow: Block[] = [];
       for (let row = 0; row < smallDimension; row++) {
