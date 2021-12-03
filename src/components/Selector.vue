@@ -1,5 +1,5 @@
 <template>
-  <div class="selector" :class="{ isOpen: isOpen }" @click="isOpen = false">
+  <div class="selector" :class="{ isOpen: isOpen }" @click="isOpen = !isOpen">
     <div v-if="!isOpen" class="toggle" @click.stop="isOpen = !isOpen"></div>
     <div v-else>
       <div class="flex">
@@ -71,20 +71,19 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .selector {
-  padding: 20px;
+  padding: 10px;
   overflow-y: auto;
   position: fixed;
   left: 0;
   top: 0;
-  height: 100%;
-  width: 1vw;
+  height: 2vw;
+  width: 100%;
   background-color: rgba(black, 0.8);
   z-index: 6;
   transition: $animationTime all ease-in-out;
 
   &.isOpen {
-    width: 100%;
-    padding: 10px;
+    height: 100%;
   }
 }
 

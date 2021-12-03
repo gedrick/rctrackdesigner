@@ -3,6 +3,7 @@
     :class="`${item.type} ${animationType} ${item.type !== 'empty' ? 'sticky' : ''}`"
     class="grid-item"
     @click="$emit('grid-item-clicked')"
+    @contextmenu.prevent="$emit('grid-item-right-clicked')"
   >
     <div v-if="item.type === 'default'" :class="`${item.type}`">
       <div class="track-object top-left-corner"></div>
