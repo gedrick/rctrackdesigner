@@ -1,5 +1,9 @@
 <template>
-  <div :class="`${item.type} ${animationType}`" class="grid-item" @click="gridItemClicked">
+  <div
+    :class="`${item.type} ${animationType}`"
+    class="grid-item"
+    @click="$emit('grid-item-clicked')"
+  >
     <div v-if="item.type === 'default'" :class="`${item.type}`">
       <div class="track-object top-left-corner"></div>
       <div class="track-object right-piece"></div>
@@ -26,7 +30,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { mapState } from 'vuex';
 
 export default defineComponent({
   name: 'GridItem',
@@ -41,14 +44,6 @@ export default defineComponent({
     animationType: {
       type: String,
       default: 'fade',
-    },
-  },
-  computed: {
-    ...mapState(['currentBlock']),
-  },
-  methods: {
-    gridItemClicked() {
-      console.log(this.currentBlock);
     },
   },
 });

@@ -6,6 +6,7 @@
         :key="`${rowIndex}-${columnIndex}`"
         :data-block-id="`${rowIndex}-${columnIndex}`"
         :item="blockItem"
+        @grid-item-clicked="gridItemClicked(`${rowIndex}-${columnIndex}`)"
       />
     </div>
   </div>
@@ -14,7 +15,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import GridItem from '@/components/GridItem.vue';
-import { mapState } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 
 export default defineComponent({
   name: 'Track',
@@ -22,7 +23,14 @@ export default defineComponent({
     GridItem,
   },
   computed: {
-    ...mapState(['track']),
+    ...mapState(['track', 'currentBlock']),
+  },
+  methods: {
+    ...mapMutations(['setTrackPosition']),
+    gridItemClicked(position: string) {
+      if (!this.currentBlock) return;
+      this.setTrackPosition({ block: this.currentBlock, position });
+    },
   },
 });
 </script>

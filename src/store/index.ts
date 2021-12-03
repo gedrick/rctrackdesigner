@@ -21,6 +21,10 @@ export default createStore({
     setTrack(state, track) {
       state.track = track;
     },
+    setTrackPosition(state, { block, position }) {
+      const coordinates = position.split('-');
+      state.track[Number(coordinates[0])][Number(coordinates[1])] = block;
+    },
   },
   actions: {
     // reinitialize() {},
@@ -39,8 +43,6 @@ export default createStore({
         track.push(nextRow);
       }
 
-      // const row = Array(this.width).fill({ type: 'default' });
-      // this.blocks = Array(this.height).fill(row);
       commit('setTrack', track);
     },
   },
