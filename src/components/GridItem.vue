@@ -21,19 +21,20 @@
       <div class="track-object stripes"></div>
     </div>
     <CurvedTurn v-if="curves.includes(item.type)" :class="item.type" />
-
-    <div v-for="barrier in item.barriers" :key="barrier" :class="barrier" class="barrier"></div>
+    <Barrier v-for="barrier in item.barriers" :key="barrier" :side="barrier" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import CurvedTurn from '@/components/Pieces/CurvedTurn.vue';
+import Barrier from '@/components/Pieces/Barrier.vue';
 
 export default defineComponent({
   name: 'GridItem',
   components: {
     CurvedTurn,
+    Barrier,
   },
   props: {
     item: {
@@ -114,9 +115,6 @@ export default defineComponent({
     position: absolute;
   }
 
-  .up-down {
-  }
-
   .left-right {
     .road {
       transform: rotate(90deg);
@@ -132,16 +130,6 @@ export default defineComponent({
     @include stripes;
   }
 
-  .default {
-    // @include stripes;
-  }
-
-  .blocked {
-    // @include stripes;
-  }
-
-  .left-up {
-  } // do nothing
   .left-down {
     transform: rotate(270deg);
   }
@@ -150,35 +138,6 @@ export default defineComponent({
   }
   .right-down {
     transform: rotate(180deg);
-  }
-
-  .barrier {
-    position: absolute;
-    background-color: $red;
-    @include stripes;
-    &.left {
-      height: 100%;
-      width: 5%;
-      top: 0;
-      left: 0;
-    }
-    &.right {
-      height: 100%;
-      width: 5%;
-      right: 0;
-    }
-    &.top {
-      width: 100%;
-      height: 5%;
-      top: 0;
-      left: 0;
-    }
-    &.bottom {
-      width: 100%;
-      height: 5%;
-      bottom: 0;
-      left: 0;
-    }
   }
 }
 </style>

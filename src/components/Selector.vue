@@ -52,7 +52,7 @@ export default defineComponent({
         // { type: 'landing' },
         // { type: 'rhythm' },
         { type: 'bridge-left-right' },
-        { type: 'bridge-right-left' },
+        { type: 'bridge-up-down' },
 
         // Empty
         { type: 'stripes' },
