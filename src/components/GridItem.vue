@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="`${item.type} ${animationType}`"
+    :class="`${item.type} ${animationType} ${item.type !== 'empty' ? 'sticky' : ''}`"
     class="grid-item"
     @click="$emit('grid-item-clicked')"
   >
@@ -17,8 +17,13 @@
       <div class="track-object road"></div>
       <div class="track-object stripe"></div>
     </div>
-    <div v-if="item.type === 'stripes'" :class="`${item.type}`">
+    <div v-if="item.type === 'left-up'" :class="`${item.type}`">
+      <!-- <CurvedTurn /> move into own component and rotate for re-usability -->
       <div class="track-object stripes"></div>
+      <div class="track-object circle"></div>
+      <div class="track-object left-rect"></div>
+      <div class="track-object right-rect"></div>
+      <div class="track-object curve"></div>
     </div>
     <div v-if="item.type === 'stripes'" :class="`${item.type}`">
       <div class="track-object stripes"></div>
@@ -51,6 +56,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .grid-item {
+  overflow: hidden;
   aspect-ratio: 1 / 1;
   color: $white;
   width: $blockSize;
@@ -64,7 +70,7 @@ export default defineComponent({
   position: relative;
   background-color: $medblue;
 
-  &.fade {
+  &.fade:not(.sticky) {
     transition: none;
     opacity: 0.6;
     &:hover {
@@ -109,6 +115,48 @@ export default defineComponent({
       left: 43%;
       transform: rotate(90deg);
       top: 7%;
+    }
+  }
+
+  .left-up {
+    .stripes {
+      @include stripes;
+      width: 100%;
+      height: 100%;
+    }
+    .circle {
+      border-radius: 50%;
+      background-color: $medblue;
+      width: 100%;
+      height: 100%;
+      bottom: 5%;
+      right: 5%;
+    }
+    .left-rect {
+      background-color: $medblue;
+      width: 50%;
+      height: 95%;
+      top: 0;
+      left: 0;
+    }
+    .right-rect {
+      background-color: $medblue;
+      width: 50%;
+      height: 95%;
+      top: -50%;
+      right: 5%;
+    }
+    .curve {
+      background-color: transparent;
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      top: -25%;
+      left: -25%;
+      margin: -34px;
+      border-bottom: 5px solid $white;
+      border-right: 5px solid $white;
+      border-style: dashed;
     }
   }
 
