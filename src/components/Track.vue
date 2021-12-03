@@ -1,6 +1,6 @@
 <template>
   <div class="block-column">
-    <div v-for="(blockRow, rowIndex) in blocks" :key="rowIndex" class="block-row">
+    <div v-for="(blockRow, rowIndex) in track" :key="rowIndex" class="block-row">
       <GridItem
         v-for="(blockItem, columnIndex) in blockRow"
         :key="`${rowIndex}-${columnIndex}`"
@@ -14,17 +14,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import GridItem from '@/components/GridItem.vue';
+import { mapState } from 'vuex';
 
 export default defineComponent({
   name: 'Track',
-  props: {
-    blocks: {
-      type: Object,
-      required: true,
-    },
-  },
   components: {
     GridItem,
+  },
+  computed: {
+    ...mapState(['track']),
   },
 });
 </script>

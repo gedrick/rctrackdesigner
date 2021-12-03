@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { mapMutations, mapState } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 
 export default defineComponent({
   computed: {
@@ -23,13 +23,16 @@ export default defineComponent({
   },
   methods: {
     ...mapMutations(['setDimension1', 'setDimension2']),
+    ...mapActions(['initialize']),
     clickDimension1(change: number) {
       if (this.dimension1 === 1 && change === -1) return;
       this.setDimension1(this.dimension1 + change);
+      this.initialize();
     },
     clickDimension2(change: number) {
       if (this.dimension2 === 1 && change === -1) return;
       this.setDimension2(this.dimension2 + change);
+      this.initialize();
     },
   },
 });
@@ -37,6 +40,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .settings {
+  z-index: 5;
   position: absolute;
   bottom: 5%;
   right: 5%;

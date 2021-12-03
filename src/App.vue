@@ -2,7 +2,7 @@
   <div class="app">
     <Settings />
     <Selector />
-    <Track :blocks="blocks" />
+    <Track />
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import { defineComponent } from 'vue';
 import Selector from '@/components/Selector.vue';
 import Settings from '@/components/Settings.vue';
 import Track from '@/components/Track.vue';
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import { Block } from '@/types';
 
 export default defineComponent({
@@ -42,14 +42,10 @@ export default defineComponent({
     },
   },
   mounted() {
-    // Set up default blocks
-    this.generateBlocks();
+    this.initialize();
   },
   methods: {
-    generateBlocks() {
-      const row = Array(this.width).fill({ type: 'default' });
-      this.blocks = Array(this.height).fill(row);
-    },
+    ...mapActions(['initialize']),
   },
 });
 </script>

@@ -18,11 +18,31 @@ export default createStore({
     setCurrentBlock(state, block: Block) {
       state.currentBlock = block;
     },
-    // generateMap(state) {
-    // const row: Array<Block> = state.dimension1.fill({ name: 'none', type: 'none' });
-    // state.track = Array<Array>(this.height).fill(row);
-    // },
+    setTrack(state, track) {
+      state.track = track;
+    },
   },
-  actions: {},
+  actions: {
+    // reinitialize() {},
+    initialize({ state, commit }) {
+      const track = [] as Block[][];
+      const largeDimension: number = Math.max(state.dimension1, state.dimension2);
+      const smallDimension: number = Math.min(state.dimension1, state.dimension2);
+      const emptyBlock: Block = { type: 'empty' };
+
+      let nextRow: Block[] = [];
+      for (let row = 0; row < smallDimension; row++) {
+        nextRow = [];
+        for (let col = 0; col < largeDimension; col++) {
+          nextRow.push(emptyBlock);
+        }
+        track.push(nextRow);
+      }
+
+      // const row = Array(this.width).fill({ type: 'default' });
+      // this.blocks = Array(this.height).fill(row);
+      commit('setTrack', track);
+    },
+  },
   modules: {},
 });

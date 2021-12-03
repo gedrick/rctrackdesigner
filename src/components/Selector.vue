@@ -40,22 +40,23 @@ export default defineComponent({
         { type: 'left-right', barriers: ['bottom'] },
         { type: 'left-right', barriers: ['top', 'bottom'] },
 
-        // Curves
-        { type: 'left-up', barriers: ['bottom-right'] },
-        { type: 'left-down', barriers: ['top-right'] },
-        { type: 'right-up' },
-        { type: 'right-down' },
-        { type: 'down-left' },
-        { type: 'down-right' },
-        { type: 'open-road' },
+        // // Curves
+        // { type: 'left-up', barriers: ['bottom-right'] },
+        // { type: 'left-down', barriers: ['top-right'] },
+        // { type: 'right-up' },
+        // { type: 'right-down' },
+        // { type: 'down-left' },
+        // { type: 'down-right' },
+        // { type: 'open-road' },
 
-        // Features
-        { type: 'jump' },
-        { type: 'table-top' },
-        { type: 'landing' },
+        // // Features
+        // { type: 'jump' },
+        // { type: 'table-top' },
+        // { type: 'landing' },
         { type: 'rhythm' },
 
         // Empty
+        { type: 'empty' },
         { type: 'stripes' },
       ] as Block[],
     };
