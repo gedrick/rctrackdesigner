@@ -2,8 +2,8 @@
   <div
     :class="`${item.type} ${animationType} ${item.type !== 'empty' ? 'sticky' : ''}`"
     class="grid-item"
-    @click="$emit('grid-item-clicked')"
-    @contextmenu.prevent="$emit('grid-item-right-clicked')"
+    @click="$emit('grid-item:click')"
+    @contextmenu.prevent="$emit('grid-item:right-click')"
   >
     <div v-if="item.type === 'default'" :class="`${item.type}`">
       <div class="track-object top-left-corner"></div>
@@ -66,6 +66,20 @@ export default defineComponent({
       ],
       bridges: ['bridge-left-right', 'bridge-up-down'],
     };
+  },
+  methods: {
+    onDragStart(e: Event) {
+      console.log('onDragStart', e);
+    },
+    onDragEnd(e: Event) {
+      console.log('onDragEnd', e);
+    },
+    onDragEnter(e: Event) {
+      console.log('onDragEnter', e);
+    },
+    onDrop(e: Event) {
+      console.log('onDrop', e);
+    },
   },
 });
 </script>

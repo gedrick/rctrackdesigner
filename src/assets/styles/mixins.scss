@@ -19,7 +19,7 @@
 }
 
 .stripe {
-  border-left: 0.25vw dashed $white;
+  border-left: $borderWidth dashed $white;
   height: 100%;
   width: 10%;
   left: 50%;

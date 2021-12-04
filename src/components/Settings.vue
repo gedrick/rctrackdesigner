@@ -42,8 +42,8 @@ export default defineComponent({
 .settings {
   z-index: 5;
   position: absolute;
-  bottom: 5%;
-  right: 5%;
+  bottom: 2%;
+  right: 2%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

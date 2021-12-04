@@ -5,8 +5,9 @@ import { BLOCK_EMPTY } from '@/constants';
 export default createStore({
   state: {
     currentBlock: null as Block | null,
-    dimension1: 6,
-    dimension2: 10,
+    isDragging: false as boolean,
+    dimension1: 6 as number,
+    dimension2: 10 as number,
     track: [] as Block[][],
   },
   mutations: {
@@ -21,6 +22,9 @@ export default createStore({
     },
     setTrack(state, track) {
       state.track = track;
+    },
+    setIsDragging(state, isDragging) {
+      state.isDragging = isDragging;
     },
     setTrackPosition(state, { block, position }) {
       const coordinates = position.split('-');

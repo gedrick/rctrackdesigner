@@ -38,14 +38,14 @@
 }
 .curve {
   background-color: transparent;
-  border-radius: 37%;
+  border-radius: 18%;
   width: 100%;
   height: 100%;
   top: -25%;
   left: -25%;
-  margin: -34px;
-  border-bottom: 5px solid $white;
-  border-right: 5px solid $white;
+  margin: -30.5px;
+  border-bottom: $borderWidth solid $white;
+  border-right: $borderWidth solid $white;
   border-style: dashed;
 }
 </style>

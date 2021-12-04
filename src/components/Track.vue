@@ -6,8 +6,8 @@
         :key="`${rowIndex}-${columnIndex}`"
         :data-block-id="`${rowIndex}-${columnIndex}`"
         :item="blockItem"
-        @grid-item-clicked="gridItemClicked(`${rowIndex}-${columnIndex}`)"
-        @grid-item-right-clicked="gridItemRightClicked(`${rowIndex}-${columnIndex}`)"
+        @grid-item:click="gridItemClicked(`${rowIndex}-${columnIndex}`)"
+        @grid-item:right-click="gridItemRightClicked(`${rowIndex}-${columnIndex}`)"
       />
     </div>
   </div>
@@ -29,12 +29,12 @@ export default defineComponent({
   },
   methods: {
     ...mapMutations(['setTrackPosition']),
-    gridItemRightClicked(position: string) {
-      this.setTrackPosition({ block: BLOCK_EMPTY, position });
-    },
     gridItemClicked(position: string) {
       if (!this.currentBlock) return;
       this.setTrackPosition({ block: this.currentBlock, position });
+    },
+    gridItemRightClicked(position: string) {
+      this.setTrackPosition({ block: BLOCK_EMPTY, position });
     },
   },
 });
