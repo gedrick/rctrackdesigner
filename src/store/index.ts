@@ -23,7 +23,22 @@ export default createStore({
     setTrack(state, track) {
       state.track = track;
     },
-    setIsDragging(state, isDragging) {
+    toggleBarrier(state, { position, side }) {
+      const coordinates: number[] = position.split('-');
+      const currentBarriers: string[] = [
+        ...(state.track[Number(coordinates[0])][Number(coordinates[1])].barriers || []),
+      ];
+
+      if (currentBarriers.includes(side)) {
+        currentBarriers.splice(currentBarriers.indexOf(side), 1);
+      } else {
+        currentBarriers.push(side);
+      }
+      console.log('changing track', state.track[coordinates[0]][coordinates[1]]);
+
+      state.track[coordinates[0]][coordinates[1]].barriers = [...currentBarriers];
+    },
+    setIsDragging(state, isDragging: boolean) {
       state.isDragging = isDragging;
     },
     setTrackPosition(state, { block, position }) {
@@ -37,12 +52,15 @@ export default createStore({
       const track = [] as Block[][];
       const largeDimension: number = Math.max(state.dimension1, state.dimension2);
       const smallDimension: number = Math.min(state.dimension1, state.dimension2);
-      const emptyBlock: Block = BLOCK_EMPTY;
+      let emptyBlock: Block;
 
       let nextRow: Block[] = [];
       for (let row = 0; row < smallDimension; row++) {
         nextRow = [];
         for (let col = 0; col < largeDimension; col++) {
+          emptyBlock = {
+            ...BLOCK_EMPTY,
+          };
           nextRow.push(emptyBlock);
         }
         track.push(nextRow);

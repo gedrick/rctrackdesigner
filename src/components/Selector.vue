@@ -8,6 +8,7 @@
           :key="item.id"
           :item="item"
           :animation-type="'grow'"
+          :showBarriers="false"
           @click.stop="onTrackSelected(item)"
         />
       </div>
@@ -59,7 +60,7 @@ export default defineComponent({
 
         BlockTypes.BLOCK_BRIDGE_UP_DOWN,
         BlockTypes.BLOCK_BRIDGE_LEFT_RIGHT,
-      ],
+      ] as Block[],
     };
   },
   methods: {

@@ -10,6 +10,10 @@
     <Bridge v-if="bridges.includes(item.type)" :class="item.type" />
     <CurvedTurn v-if="curves.includes(item.type)" :class="item.type" />
     <Barrier v-for="barrier in item.barriers" :key="barrier" :side="barrier" />
+    <BarrierMarkers
+      v-if="showBarriers && barriersAllowed"
+      @barrier-marker:click="$emit('barrier-marker:click', $event)"
+    />
   </div>
 </template>
 
@@ -20,6 +24,7 @@ import Road from '@/components/Pieces/Road.vue';
 import CurvedTurn from '@/components/Pieces/CurvedTurn.vue';
 import Bridge from '@/components/Pieces/Bridge.vue';
 import Barrier from '@/components/Pieces/Barrier.vue';
+import BarrierMarkers from '@/components/BarrierMarkers.vue';
 
 export default defineComponent({
   name: 'GridItem',
@@ -29,23 +34,25 @@ export default defineComponent({
     CurvedTurn,
     Bridge,
     Barrier,
+    BarrierMarkers,
   },
   props: {
     item: {
       type: Object,
-      default() {
-        return {};
-      },
       required: true,
     },
     animationType: {
       type: String,
       default: 'fade',
     },
+    showBarriers: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
-      roads: ['up-down', 'left-right'],
+      roads: ['up-down', 'left-right'] as string[],
       curves: [
         'left-up',
         'left-down',
@@ -54,9 +61,14 @@ export default defineComponent({
         'down-left',
         'down-right',
         'open-road',
-      ],
-      bridges: ['bridge-up-down', 'bridge-left-right'],
+      ] as string[],
+      bridges: ['bridge-up-down', 'bridge-left-right'] as string[],
     };
+  },
+  computed: {
+    barriersAllowed(): boolean {
+      return this.roads.includes(this.item.type);
+    },
   },
   methods: {
     onDragStart(e: Event) {

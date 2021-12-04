@@ -8,6 +8,9 @@
         :item="blockItem"
         @grid-item:click="gridItemClicked(`${rowIndex}-${columnIndex}`)"
         @grid-item:right-click="gridItemRightClicked(`${rowIndex}-${columnIndex}`)"
+        @barrier-marker:click="
+          onBarrierMarkerClicked($event, `${rowIndex}-${columnIndex}`, blockItem)
+        "
       />
     </div>
   </div>
@@ -18,6 +21,7 @@ import { defineComponent } from 'vue';
 import GridItem from '@/components/GridItem.vue';
 import { mapMutations, mapState } from 'vuex';
 import { BLOCK_EMPTY } from '@/constants';
+import { Block } from '@/types';
 
 export default defineComponent({
   name: 'Track',
@@ -28,13 +32,18 @@ export default defineComponent({
     ...mapState(['track', 'currentBlock']),
   },
   methods: {
-    ...mapMutations(['setTrackPosition']),
+    ...mapMutations(['setTrackPosition', 'toggleBarrier']),
     gridItemClicked(position: string) {
       if (!this.currentBlock) return;
-      this.setTrackPosition({ block: this.currentBlock, position });
+      this.setTrackPosition({ block: { ...this.currentBlock }, position });
     },
     gridItemRightClicked(position: string) {
-      this.setTrackPosition({ block: BLOCK_EMPTY, position });
+      this.setTrackPosition({ block: { ...BLOCK_EMPTY }, position });
+    },
+    onBarrierMarkerClicked(side: string, position: string, blockItem: Block) {
+      if (['up-down', 'left-right'].includes(blockItem.type)) {
+        this.toggleBarrier({ position, side });
+      }
     },
   },
 });
