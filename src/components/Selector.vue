@@ -32,24 +32,24 @@ export default defineComponent({
       isOpen: true as boolean,
       gridItems: [
         // Empty
-        BlockTypes.BLOCK_EMPTY,
+        // BlockTypes.BLOCK_EMPTY,
         BlockTypes.BLOCK_STRIPES,
 
         // Straightaways
         BlockTypes.BLOCK_UP_DOWN,
-        BlockTypes.BLOCK_UP_DOWN_LEFT,
-        BlockTypes.BLOCK_UP_DOWN_RIGHT,
-        BlockTypes.BLOCK_UP_DOWN_LEFT_RIGHT,
+        // BlockTypes.BLOCK_UP_DOWN_LEFT,
+        // BlockTypes.BLOCK_UP_DOWN_RIGHT,
+        // BlockTypes.BLOCK_UP_DOWN_LEFT_RIGHT,
         BlockTypes.BLOCK_LEFT_RIGHT,
-        BlockTypes.BLOCK_LEFT_RIGHT_TOP,
-        BlockTypes.BLOCK_LEFT_RIGHT_BOTTOM,
-        BlockTypes.BLOCK_LEFT_RIGHT_TOP_BOTTOM,
+        // BlockTypes.BLOCK_LEFT_RIGHT_TOP,
+        // BlockTypes.BLOCK_LEFT_RIGHT_BOTTOM,
+        // BlockTypes.BLOCK_LEFT_RIGHT_TOP_BOTTOM,
 
         // Curves
-        BlockTypes.BLOCK_LEFT_UP,
+        BlockTypes.BLOCK_RIGHT_DOWN,
         BlockTypes.BLOCK_LEFT_DOWN,
         BlockTypes.BLOCK_RIGHT_UP,
-        BlockTypes.BLOCK_RIGHT_DOWN,
+        BlockTypes.BLOCK_LEFT_UP,
 
         // Features
         BlockTypes.BLOCK_JUMP,

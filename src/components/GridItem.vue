@@ -5,22 +5,8 @@
     @click="$emit('grid-item:click')"
     @contextmenu.prevent="$emit('grid-item:right-click')"
   >
-    <div v-if="item.type === 'default'" :class="`${item.type}`">
-      <div class="track-object top-left-corner"></div>
-      <div class="track-object right-piece"></div>
-      <div class="track-object bottom-piece"></div>
-    </div>
-    <div v-if="item.type === 'up-down'" :class="`${item.type}`">
-      <div class="track-object road"></div>
-      <div class="track-object stripe"></div>
-    </div>
-    <div v-if="item.type === 'left-right'" :class="`${item.type}`">
-      <div class="track-object road"></div>
-      <div class="track-object stripe"></div>
-    </div>
-    <div v-if="item.type === 'stripes'" :class="`${item.type}`">
-      <div class="track-object stripes"></div>
-    </div>
+    <Stripes v-if="item.type === 'stripes'" :class="item.type" />
+    <Road v-if="roads.includes(item.type)" :class="item.type" />
     <Bridge v-if="bridges.includes(item.type)" :class="item.type" />
     <CurvedTurn v-if="curves.includes(item.type)" :class="item.type" />
     <Barrier v-for="barrier in item.barriers" :key="barrier" :side="barrier" />
@@ -29,6 +15,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import Stripes from '@/components/Pieces/Stripes.vue';
+import Road from '@/components/Pieces/Road.vue';
 import CurvedTurn from '@/components/Pieces/CurvedTurn.vue';
 import Bridge from '@/components/Pieces/Bridge.vue';
 import Barrier from '@/components/Pieces/Barrier.vue';
@@ -36,6 +24,8 @@ import Barrier from '@/components/Pieces/Barrier.vue';
 export default defineComponent({
   name: 'GridItem',
   components: {
+    Stripes,
+    Road,
     CurvedTurn,
     Bridge,
     Barrier,
@@ -55,6 +45,7 @@ export default defineComponent({
   },
   data() {
     return {
+      roads: ['up-down', 'left-right'],
       curves: [
         'left-up',
         'left-down',
@@ -64,7 +55,7 @@ export default defineComponent({
         'down-right',
         'open-road',
       ],
-      bridges: ['bridge-left-right', 'bridge-up-down'],
+      bridges: ['bridge-up-down', 'bridge-left-right'],
     };
   },
   methods: {
@@ -132,37 +123,6 @@ export default defineComponent({
 
   .track-object {
     position: absolute;
-  }
-
-  .left-right {
-    .road {
-      transform: rotate(90deg);
-    }
-    .stripe {
-      left: 47%;
-      transform: rotate(90deg);
-      top: 7%;
-    }
-  }
-
-  .stripes {
-    @include stripes;
-  }
-
-  // Curves
-  .left-down {
-    transform: rotate(270deg);
-  }
-  .right-up {
-    transform: rotate(90deg);
-  }
-  .right-down {
-    transform: rotate(180deg);
-  }
-
-  // Bridge
-  .bridge-left-right {
-    transform: rotate(90deg);
   }
 }
 </style>
