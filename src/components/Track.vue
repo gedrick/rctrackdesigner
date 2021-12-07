@@ -20,7 +20,7 @@
 import { defineComponent } from 'vue';
 import GridItem from '@/components/GridItem.vue';
 import { mapMutations, mapState } from 'vuex';
-import { BLOCK_EMPTY } from '@/constants';
+import { BLOCK_EMPTY, TYPES_WITH_BARRIERS } from '@/constants';
 import { Block } from '@/types';
 
 export default defineComponent({
@@ -41,7 +41,7 @@ export default defineComponent({
       this.setTrackPosition({ block: { ...BLOCK_EMPTY }, position });
     },
     onBarrierMarkerClicked(side: string, position: string, blockItem: Block) {
-      if (['up-down', 'left-right'].includes(blockItem.type)) {
+      if (TYPES_WITH_BARRIERS.includes(blockItem.type)) {
         this.toggleBarrier({ position, side });
       }
     },

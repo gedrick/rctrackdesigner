@@ -3,6 +3,9 @@ import { Block } from '@/types';
 declare const BLOCK_EMPTY: Block;
 export const BLOCK_EMPTY: Block;
 
+declare const BLOCK_SPACE: Block;
+export const BLOCK_SPACE: Block;
+
 declare const BLOCK_STRIPES: Block;
 export const BLOCK_STRIPES: Block;
 
@@ -59,3 +62,6 @@ export const BLOCK_BRIDGE_UP_DOWN: Block;
 
 declare const BLOCK_BRIDGE_LEFT_RIGHT: Block;
 export const BLOCK_BRIDGE_LEFT_RIGHT: Block;
+
+declare const TYPES_WITH_BARRIERS: string[];
+export const TYPES_WITH_BARRIERS;

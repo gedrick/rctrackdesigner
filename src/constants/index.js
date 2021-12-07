@@ -1,9 +1,4 @@
-export const BLOCK_EMPTY = {
-  id: 0,
-  type: 'empty',
-};
-
-export const BLOCK_STRIPES = { id: 19, type: 'stripes' };
+export const BLOCK_EMPTY = { id: 0, type: 'empty' };
 
 // Straightaways
 export const BLOCK_UP_DOWN = { id: 1, type: 'up-down' };
@@ -31,5 +26,13 @@ export const BLOCK_TABLE_TOP = { id: 14, type: 'table-top' };
 export const BLOCK_LANDING = { id: 15, type: 'landing' };
 export const BLOCK_WHOOPS = { id: 16, type: 'whoops' };
 
+// Bridges
 export const BLOCK_BRIDGE_UP_DOWN = { id: 17, type: 'bridge-up-down' };
 export const BLOCK_BRIDGE_LEFT_RIGHT = { id: 18, type: 'bridge-left-right' };
+
+// Empty / placeholders
+export const BLOCK_STRIPES = { id: 19, type: 'stripes' };
+export const BLOCK_SPACE = { id: 20, type: 'space' };
+
+// Utility objects
+export const TYPES_WITH_BARRIERS = [BLOCK_UP_DOWN.type, BLOCK_LEFT_RIGHT.type, BLOCK_SPACE.type];

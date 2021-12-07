@@ -33,7 +33,7 @@ export default defineComponent({
       isOpen: true as boolean,
       gridItems: [
         // Empty
-        // BlockTypes.BLOCK_EMPTY,
+        BlockTypes.BLOCK_SPACE,
         BlockTypes.BLOCK_STRIPES,
 
         // Straightaways

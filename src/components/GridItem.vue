@@ -5,6 +5,7 @@
     @click="$emit('grid-item:click')"
     @contextmenu.prevent="$emit('grid-item:right-click')"
   >
+    <Space v-if="item.type === 'space'" :class="item.type" />
     <Stripes v-if="item.type === 'stripes'" :class="item.type" />
     <Road v-if="roads.includes(item.type)" :class="item.type" />
     <Bridge v-if="bridges.includes(item.type)" :class="item.type" />
@@ -19,16 +20,19 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import Space from '@/components/Pieces/Space.vue';
 import Stripes from '@/components/Pieces/Stripes.vue';
 import Road from '@/components/Pieces/Road.vue';
 import CurvedTurn from '@/components/Pieces/CurvedTurn.vue';
 import Bridge from '@/components/Pieces/Bridge.vue';
 import Barrier from '@/components/Pieces/Barrier.vue';
 import BarrierMarkers from '@/components/BarrierMarkers.vue';
+import { TYPES_WITH_BARRIERS } from '@/constants';
 
 export default defineComponent({
   name: 'GridItem',
   components: {
+    Space,
     Stripes,
     Road,
     CurvedTurn,
@@ -67,7 +71,7 @@ export default defineComponent({
   },
   computed: {
     barriersAllowed(): boolean {
-      return this.roads.includes(this.item.type);
+      return TYPES_WITH_BARRIERS.includes(this.item.type);
     },
   },
   methods: {
