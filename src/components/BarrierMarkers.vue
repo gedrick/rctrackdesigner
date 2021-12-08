@@ -1,5 +1,13 @@
 <template>
   <div class="barrier-markers">
+    <div
+      @click.stop="$emit('barrier-marker:click', 'top-left')"
+      class="diagonal barrier top-left"
+    ></div>
+    <div
+      @click.stop="$emit('barrier-marker:click', 'top-right')"
+      class="diagonal barrier top-right"
+    ></div>
     <div @click.stop="$emit('barrier-marker:click', 'left')" class="horizontal barrier left"></div>
     <div
       @click.stop="$emit('barrier-marker:click', 'right')"
@@ -18,14 +26,20 @@
   & > div {
     position: absolute;
   }
+
+  .diagonal {
+    height: 10%;
+    width: $blockWidthDiagonal;
+  }
+
   .horizontal {
-    width: 20%;
-    height: 100%;
+    width: 10%;
+    height: 80%;
   }
 
   .vertical {
-    height: 20%;
-    width: 100%;
+    height: 10%;
+    width: 80%;
   }
 
   .barrier {
@@ -34,14 +48,32 @@
     &:hover {
       opacity: 1;
     }
+    &.top-left {
+      transform-origin: left;
+      transform: rotate(45deg);
+      left: 1%;
+      top: -4%;
+    }
+    &.top-right {
+      transform-origin: right;
+      transform: rotate(-45deg);
+      right: 0%;
+      top: -5%;
+    }
+    &.left {
+      top: 10%;
+    }
     &.right {
+      top: 10%;
       right: 0;
     }
     &.top {
       top: 0;
+      left: 10%;
     }
     &.bottom {
       bottom: 0;
+      left: 10%;
     }
   }
 }

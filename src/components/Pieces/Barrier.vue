@@ -44,5 +44,21 @@ export default defineComponent({
     bottom: 0;
     left: 0;
   }
+  &.top-left {
+    width: $blockWidthDiagonal;
+    height: 5%;
+    top: 0;
+    left: 0;
+    transform-origin: left;
+    transform: rotate(45deg);
+  }
+  &.top-right {
+    width: $blockWidthDiagonal;
+    height: 5%;
+    top: 0;
+    right: 0;
+    transform-origin: right;
+    transform: rotate(-45deg);
+  }
 }
 </style>
