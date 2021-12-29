@@ -65,3 +65,12 @@ export const BLOCK_BRIDGE_LEFT_RIGHT: Block;
 
 declare const TYPES_WITH_BARRIERS: string[];
 export const TYPES_WITH_BARRIERS;
+
+declare const BARRIER_MAPPINGS: Record<string, number>;
+export const BARRIER_MAPPINGS;
+
+declare const SAVE_ROW_SEPARATOR: string;
+export const SAVE_ROW_SEPARATOR;
+
+declare const SAVE_BARRIER_SEPARATOR: string;
+export const SAVE_BARRIER_SEPARATOR;

@@ -36,3 +36,17 @@ export const BLOCK_SPACE = { id: 20, type: 'space' };
 
 // Utility objects
 export const TYPES_WITH_BARRIERS = [BLOCK_UP_DOWN.type, BLOCK_LEFT_RIGHT.type, BLOCK_SPACE.type];
+
+// Barrier mappings
+export const BARRIER_MAPPINGS = {
+  top: 0,
+  right: 1,
+  bottom: 2,
+  left: 3,
+  'top-right': 4,
+  'top-left': 5,
+};
+
+// Saving/loading tracks.
+export const SAVE_ROW_SEPARATOR = '*';
+export const SAVE_BARRIER_SEPARATOR = '|';

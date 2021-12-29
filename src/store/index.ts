@@ -34,7 +34,6 @@ export default createStore({
       } else {
         currentBarriers.push(side);
       }
-      console.log('changing track', state.track[coordinates[0]][coordinates[1]]);
 
       state.track[coordinates[0]][coordinates[1]].barriers = [...currentBarriers];
     },
