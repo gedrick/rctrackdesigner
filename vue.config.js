@@ -6,4 +6,8 @@ module.exports = {
       },
     },
   },
+  outputDir: './dist',
+  assetsDir: './assets/',
+  indexPath: '../index.html',
+  publicPath: '/rctrackdesigner/',
 };
